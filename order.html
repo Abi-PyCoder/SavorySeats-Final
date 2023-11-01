@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FCE4EC;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #FF4081;
+            color: #fff;
+            align-items: center;
+            padding: 1px;
+            height: 50px;
+        }
+
+        .content {
+            max-width: 320px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .quantity-input, .time-slot-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn, .quantity {
+            font-size: 20px;
+            border-radius: 50%;
+            padding: 8px 14px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .quantity-btn {
+            background-color: #FF4081;
+            color: #fff;
+        }
+
+        .quantity {
+            border: 1px solid #FF4081;
+            border-radius: 5px;
+            width: 40px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .plus {
+            background-color: #00C853;
+        }
+
+        .minus {
+            background-color: #FF6F61;
+        }
+
+        select {
+            font-size: 18px;
+            padding: 10px;
+            border: 1px solid #FF4081;
+            border-radius: 5px;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('arrow.png');
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+        button {
+        background-color: #FF4081; /* Bright pink button */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/home">&#8592; Back</a> 
+    </header>
+
+    <div class="content">
+        <form class="order_form" action="" method="POST">
+        <h3>{{data.name}}</h3>
+        <div class="quantity-input">
+            <label for="time-slot">Quantity</label>
+            <button class="quantity-btn minus">-</button>
+            <input type="text" class="quantity" value="1">
+            <button class="quantity-btn plus">+</button>
+        </div>
+
+        <div class="time-slot-input">
+            <label for="time-slot">Select a Time Slot:</label>
+            <input type="text" class="quantity">
+        </div>
+        <button type="submit">Submit</button>
+
+    </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='quantity.js') }}"></script>
+</body>
+</html>

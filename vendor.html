@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vendor</title>
+        <style>
+                    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #dfdddd; /* Light pink background */
+        padding: 10px;
+    }
+
+    ul.list {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+    li {
+        margin-left: 10px;
+    }
+
+    h2 {
+        margin: 10px 0;
+        font-size: 20px;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #FF4081; /* Bright pink link color */
+        cursor: pointer;
+    }
+
+    ul, li {
+        list-style: none;
+        padding: 0;
+    }
+
+    /* Media query to make it responsive on mobile devices */
+    @media (max-width: 768px) {
+        ul.list {
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        form {
+            padding: 20px;
+            margin: 10px 0;
+            flex-direction: column; /* Stack text boxes in mobile view */
+            align-items: center;
+        }
+
+        input.food {
+            width: 50%;
+        }
+        button {
+            width: 50%;
+        }
+        }
+        .container{
+            background-color: white;
+        }
+        .order-details{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 65px;
+            width: 100%;
+        }
+        .ord-elements{
+            display: flex;
+            align-items: center;
+        }
+        .ord-quantity{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label{
+            color: #FF4081;
+        }
+        .orderid{
+            font-weight: 700;
+        }
+        form{
+            margin: 0;
+        }
+        button{
+            background-color: #FF4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 40px;
+            width: 50px;
+        }
+        </style>
+    </head>
+    <body>
+        <ul class="list">
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+        <div class="container">
+        {% for row in data %}
+
+            <div class="order-details">
+            <div class="ord-quantity">
+            <label class="orderid">{{row.ord_id}}</label>
+            {{row.food_name}}
+            </div>
+            <div class="ord-quantity">
+            <label>Quantity:</label>
+            {{row.quantity}}
+            </div>
+            <div class="ord-quantity">
+            <label>Time:</label>
+            {{row.time_slot}}
+            </div>
+            <div class="ord-quantity">
+            <form action="/status" method="POST">
+                <input type="hidden" name="domain_id" value="vendor">
+                <input type="hidden" name="id" value="{{row.id}}">
+                <button>Ready</button>
+            </form>
+        </div>
+            </div>
+
+        {% endfor %}
+        </div>
+    </body>
+</html>
+
+
+
+

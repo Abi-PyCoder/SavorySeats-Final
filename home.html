@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e2e3e4; /* Light pink background */
+        padding: 10px;
+    }
+    .list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    li {
+        margin-left: 10px;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        display: flex;
+        flex-direction: row; /* Display text boxes side by side */
+        align-items: center;
+        justify-content: space-between; /* Distribute items evenly */
+    }
+
+    input.food {
+        width: 45%; /* Make text boxes side by side with some spacing */
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #028cee; /* Bright pink border */
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #028cee; /* Bright pink button */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #0074c7;
+        transition: background-color 0.4s;
+    }
+    .place-order{
+        background-color: #028cee; /* Bright pink button */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin: 10px 0;
+        font-size: 20px;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black; 
+        cursor: pointer;
+    }
+
+    ul, li {
+        list-style: none;
+        padding: 0;
+    }
+    
+    select {
+            font-size: 18px;
+            padding: 10px;
+            border: 1px solid #028cee;
+            border-radius: 5px;
+            width: 45%;
+            height: 37px;
+            font-size: 14px;
+        }
+
+    @media (max-width: 768px) {
+        ul.list {
+            padding: 10px 0;
+        }
+        form {
+            padding: 20px;
+            margin: 10px 0;
+            flex-direction: column; 
+            align-items: center;
+        }
+
+        input.food {
+            width: 50%;
+        }
+        select{
+            width: 50%;
+        }
+        button {
+            margin-top: 3px;
+            width: 50%;
+        }
+        .place-order{
+            width: 100%;
+        }
+        }
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /* Modal Content */
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border: 1px solid #888;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+            max-width: 80%; /* Set a maximum width for the modal */
+            margin-top: 62vh; /* Center the modal vertically (adjust as needed) */
+            overflow-y: auto; /* Enable vertical scrolling if the modal's content exceeds the viewport */
+        }
+        .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #FF4081; 
+}
+
+
+
+        /* Updated styles for order form within the modal */
+        .order_form {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quantity-input,
+        .time-slot-input {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .quantity-btn,
+        .quantity {
+            font-size: 20px;
+            border-radius: 50%;
+            padding: 8px 14px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .quantity-btn {
+            background-color: #028cee;
+            color: #fff;
+        }
+
+        .quantity {
+            border: 1px solid #028cee;
+            border-radius: 5px;
+            width: 80px;
+            text-align: center;
+        }
+
+    .nav_container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+    }
+    .nav-item1{
+        display: flex;
+        align-items: center;
+        width: 50%;
+        cursor: pointer;
+        background-color: #028cee;
+    }
+    .nav-item2{
+        display: flex;
+        align-items: center;
+        width: 50%;
+        cursor: pointer;
+
+    }
+    .nav-link1{
+        position: relative;
+        left: 40%;
+        color: white;
+    }
+    .nav-link2{
+        position: relative;
+        left: 40%;
+    }
+    .search-result {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #fff; /* Card background color */
+        }
+
+        .search-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .search-result h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #333; /* Text color */
+        }
+        label{
+            font-weight: 600;
+        }
+        .logout{
+            background-color: black;
+            color: white !important;
+            padding: 8px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="list">
+        <P>Hello, {{user.email}}</P>
+        <li><a class="logout" href="/logout">Logout</a></li>
+    </div>
+    <form method="POST", action="/home", enctype="multipart/form-data">
+        <input type="text" class="food" name="food_query" placeholder="Search by Food">
+        <select class="food" name="counter_query">
+            {% for data in counter_select %}
+            <option>{{data.name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search</button>
+    </form>    
+
+    {% if food_query %}
+    <h2>Search results for Food "{{ food_query }}":</h2>
+    
+
+        {% for food in food_results %}
+
+        <a id="open-modal" data-toggle="modal" data-target="#myModal{{food.id}}">
+            <div class="search-result">
+                <div class="search-details">
+                <label>Counter - {{food.counter_name}}</label>
+                <label>{{ food.name }}</label>   
+                <label>Quantity left : {{food.quantity}}</label>
+                </div>
+                <div>
+                <label>{{ food.price }}Rs</label>
+                </div>
+            </div>
+        </a> 
+        <div id="myModal{{food.id}}" class="modal">
+            <div class="modal-content" style="max-width: 100%;">
+                <span class="close" id="close-modal">&times;</span>
+                <h2>{{food.name}}</h2>
+                <div class="content">
+                    <form class="order_form" action="/order" method="POST">
+                    <div class="quantity-input">
+                        <input type="hidden" value="{{food.id}}" name="id">
+                        <input type="hidden" value="{{food.counter_name}}" name="counter">
+                        <label for="time-slot">Quantity</label>
+                        <input type="text" class="quantity" value="1" name="quantity">
+                    </div>
+            
+                    <div class="time-slot-input">
+                        <label for="time-slot">Select a Time Slot:</label>
+                        <input type="text" class="quantity" name="time_slot">
+                    </div>
+                    <button class="place-order" type="submit">Place Order</button>
+            
+                </form>
+                </div>
+            </div>
+        </div>
+        
+
+
+    {% endfor %}
+    {% endif %}
+
+    {% if counter_query %}
+    {% for data in counter %}
+    <p>Counter Name: {{ data.name }}</p>
+    <ul>
+        {% for row in data.foods %}
+        <a id="open-modal" data-toggle="modal" data-target="#myModal{{row.id}}">{{ row.name }} - Price:  {{ row.price }}Rs</a></br> 
+        <div id="myModal{{row.id}}" class="modal">
+            <div class="modal-content"   style="max-width: 100%;">
+                <span class="close" id="close-modal">&times;</span>
+                <h2>{{row.name}}</h2>
+                <div class="content">
+                    <form class="order_form" action="/order" method="POST">
+                    <div class="quantity-input">
+                        <input type="hidden" value="{{row.id}}" name="id">
+                        <input type="hidden" value="{{row.counter_name}}" name="counter">
+                        <label for="time-slot">Quantity</label>
+                        <input type="text" class="quantity" value="1" name="quantity">
+                    </div>
+            
+                    <div class="time-slot-input">
+                        <label for="time-slot">Select a Time Slot:</label>
+                        <input type="text" class="quantity" name="time_slot">
+                    </div>
+                    <button class="place-order" type="submit">Submit</button>
+            
+                </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    {% endif %}
+
+    <div class="nav_container">
+        <div class="nav-item1">
+            <a class="nav-link1" href="{{url_for('routes.home')}}">Order</a>
+        </div>
+        <div class="nav-item2">
+            <a class="nav-link2"  href="{{url_for('routes.myorders')}}">My Orders</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='quantity.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
